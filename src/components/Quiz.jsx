@@ -1,10 +1,30 @@
 import {useState} from "react";
+import QUESTIONS from '../assets/questions.js'
 
 const Quiz = () => {
-    const [activeQuestionIndex,setActiveQuestionIndex] = useState(0);
     const [userAnswers, setUserAnswers] = useState([]);
+    const activeQuestionIndex = userAnswers.length;
+
+    const handleSelectAnswer = (selectedAnswer) => {
+        setUserAnswers((prevState) => {
+            return [...prevState, selectedAnswer]
+        });
+    }
+
     return (
-        <p>Currently Active Question</p>
+        <div id={'quiz'}>
+            <div id={'question'}>
+                <p>{QUESTIONS[activeQuestionIndex].text}</p>
+                <ul id={'answers'}>
+                    {QUESTIONS[activeQuestionIndex].answers.map((item, index) => (
+                        <li key={index} className={'answer'}>
+                            <button onClick={() => handleSelectAnswer(item)}>{item}</button>
+                        </li>
+                    ))
+                    }
+                </ul>
+            </div>
+        </div>
     );
 }
 
