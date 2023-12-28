@@ -1,6 +1,7 @@
 import {useState} from "react";
 import QUESTIONS from '../assets/questions.js'
 import quizCompleted from '../assets/quiz-complete.png'
+import QuestionTimer from "./QuestionTimer.jsx";
 
 const Quiz = () => {
     const [userAnswers, setUserAnswers] = useState([]);
@@ -24,6 +25,7 @@ const Quiz = () => {
 
     return (
         <div id={'quiz'}>
+            <QuestionTimer timeout={10000} onTimeout={() => handleSelectAnswer(null)} />
             <div id={'question'}>
                 <p>{QUESTIONS[activeQuestionIndex].text}</p>
                 <ul id={'answers'}>
