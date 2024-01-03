@@ -1,9 +1,10 @@
 import {useState, useCallback} from "react";
 import QUESTIONS from '../assets/questions.js'
 import quizCompleted from '../assets/quiz-complete.png'
-import QuestionTimer from "./QuestionTimer.jsx";
+import Question from "./Question.jsx";
 
 const Quiz = () => {
+
     const [answerState, setAnswerState] = useState('');
     const [userAnswers, setUserAnswers] = useState([]);
 
@@ -19,7 +20,7 @@ const Quiz = () => {
             {
                 setAnswerState('correct');
             } else {
-                setAnswerState('incorrect');
+                setAnswerState('wrong');
             }
             setTimeout(() => {
                 setAnswerState('');
@@ -37,40 +38,16 @@ const Quiz = () => {
         </div>)
     }
 
-    const shuffledAnswers = [...QUESTIONS[activeQuestionIndex].answers];
-    shuffledAnswers.sort(() => Math.random() - 0.5);
-
     return (
         <div id={'quiz'}>
-            <QuestionTimer
+            <Question
                 key={activeQuestionIndex}
-                timeout={10000}
-                onTimeout={handleSkipAnswer} />
-            <div id={'question'}>
-                <p>{QUESTIONS[activeQuestionIndex].text}</p>
-                <ul id={'answers'}>
-                    {
-                        shuffledAnswers.map((item, index) => {
-                            let cssClasses = '';
-                            const isSelected = userAnswers[userAnswers.length - 1] === item;
-                            if(answerState === 'answered' && isSelected)
-                            {
-                                cssClasses = 'selected';
-                            }
-
-                            if((answerState === 'correct' || answerState === 'wrong') && isSelected)
-                            {
-                                cssClasses = answerState;
-                            }
-                            return (
-                                <li key={index} className={'answer'}>
-                                    <button onClick={() => handleSelectAnswer(item)} className={cssClasses}>{item}</button>
-                                </li>
-                            );
-                        })
-                    }
-                </ul>
-            </div>
+                answers={QUESTIONS[activeQuestionIndex].answers}
+                onSelectAnswer={handleSelectAnswer}
+                selectedAnswer={userAnswers[userAnswers.length - 1]}
+                answerState={answerState}
+                onSkipAnswer={handleSkipAnswer}
+                questionText={QUESTIONS[activeQuestionIndex].text}/>
         </div>
     );
 }
