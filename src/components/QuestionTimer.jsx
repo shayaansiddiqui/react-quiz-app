@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import PropTypes from "prop-types";
 
 const QuestionTimer = ({timeout, onTimeout, mode}) => {
     const [remainingTime, setRemainingTime] = useState(timeout);
@@ -23,6 +24,12 @@ const QuestionTimer = ({timeout, onTimeout, mode}) => {
     return (
         <progress id={'question-time'} value={remainingTime} max={timeout} className={mode}/>
     );
+}
+
+QuestionTimer.propTypes = {
+    timeout: PropTypes.node.isRequired,
+    mode: PropTypes.node.isRequired,
+    onTimeout: PropTypes.func
 }
 
 export default QuestionTimer;

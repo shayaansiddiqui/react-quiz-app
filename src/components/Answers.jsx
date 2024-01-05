@@ -1,11 +1,5 @@
 import {useRef} from "react";
 import PropTypes from "prop-types";
-Answers.propTypes = {
-    answers: PropTypes.node.isRequired,
-    selectedAnswer: PropTypes.node.isRequired,
-    answerState: PropTypes.node.isRequired,
-    onSelect: PropTypes.func
-}
 
 const Answers = ({answers, selectedAnswer, answerState, onSelect}) => {
     const shuffledAnswers = useRef();
@@ -38,4 +32,12 @@ const Answers = ({answers, selectedAnswer, answerState, onSelect}) => {
         </ul>
     );
 }
+
+Answers.propTypes = {
+    answers: PropTypes.node.isRequired,
+    selectedAnswer: PropTypes.node.isRequired,
+    answerState: PropTypes.node.isRequired,
+    onSelect: PropTypes.func
+}
+
 export default Answers;

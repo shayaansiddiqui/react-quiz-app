@@ -2,6 +2,7 @@ import QuestionTimer from "./QuestionTimer.jsx";
 import QUESTIONS from "../assets/questions.js";
 import Answers from "./Answers.jsx";
 import {useState} from "react";
+import PropTypes from "prop-types";
 
 const Question = ({questionIndex, onSelectAnswer, onSkipAnswer}) => {
     const [answer, setAnswer] = useState({
@@ -62,6 +63,12 @@ const Question = ({questionIndex, onSelectAnswer, onSkipAnswer}) => {
             </ul>
         </div>
     )
+}
+
+Question.propTypes = {
+    questionIndex: PropTypes.node.isRequired,
+    onSkipAnswer: PropTypes.func,
+    onSelectAnswer: PropTypes.func
 }
 
 export default Question;
