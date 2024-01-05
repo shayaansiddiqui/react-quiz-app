@@ -1,4 +1,5 @@
 import quizLogo from '../assets/quiz-logo.png';
+
 const Header = () => {
     return (
         <header>
